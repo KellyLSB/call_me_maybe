@@ -61,7 +61,7 @@ module CallMeMaybe
         # Run the listening events
         CallMeMaybe::Exchange.listeners[event][id].map do |callback|
           if callback[:block] && callback[:block].is_a?(Proc)
-            callback[:block].call(obj, args, &block)
+            callback[:block].call(obj, args[:meta], &block)
           else
             callback[:klass].constantize.__send__(callback[:method], obj, args[:meta], &block)
           end
